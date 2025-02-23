@@ -1,20 +1,31 @@
 import streamlit as st
 import openai
-import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from app.config import settings
-from typing import Optional
 
 # Configure OpenAI
-openai.api_key = settings.OPENAI_API_KEY
+openai.api_key = st.secrets["OPENAI_API_KEY"]
+
+JEEP_SPECS = {
+    "make": "Jeep",
+    "model": "Wrangler",
+    "year": 2009,
+    "engine_type": "3.8L OHV 12-VALVE SMPI V6",
+    "horsepower": "202 @ 5200 RPM",
+    "torque": "237 @ 4000 RPM",
+    "max_towing": "1,000 lbs",
+    "drivetrain": "4-Wheel Drive",
+    "transmission": "6-Speed Manual",
+    "fuel_capacity": "18.6 gal",
+    "fuel_economy_city": 15,
+    "fuel_economy_hwy": 19
+}
 
 def main():
     st.title("2009 Jeep Wrangler Technical Support")
     st.subheader("Get solutions for common technical issues and maintenance procedures")
     
     # Debug: Print first/last 4 chars of API key to verify correct one is loaded
-    api_key = settings.OPENAI_API_KEY
+    api_key = st.secrets["OPENAI_API_KEY"]
     st.write(f"API Key: {api_key[:4]}...{api_key[-4:]}")
     
     # Debug: Print all environment variables
@@ -26,14 +37,13 @@ def main():
     # Vehicle Specs Section
     if st.sidebar.button("Show Vehicle Specs"):
         st.header("Vehicle Specifications")
-        specs = settings.JEEP_SPECS
-        st.write(f"Engine: {specs['engine_type']}")
-        st.write(f"Horsepower: {specs['horsepower']}")
-        st.write(f"Torque: {specs['torque']}")
-        st.write(f"Drivetrain: {specs['drivetrain']}")
-        st.write(f"Transmission: {specs['transmission']}")
-        st.write(f"Fuel Capacity: {specs['fuel_capacity']}")
-        st.write(f"Fuel Economy: {specs['fuel_economy_city']}/{specs['fuel_economy_hwy']} (City/Highway)")
+        st.write(f"Engine: {JEEP_SPECS['engine_type']}")
+        st.write(f"Horsepower: {JEEP_SPECS['horsepower']}")
+        st.write(f"Torque: {JEEP_SPECS['torque']}")
+        st.write(f"Drivetrain: {JEEP_SPECS['drivetrain']}")
+        st.write(f"Transmission: {JEEP_SPECS['transmission']}")
+        st.write(f"Fuel Capacity: {JEEP_SPECS['fuel_capacity']}")
+        st.write(f"Fuel Economy: {JEEP_SPECS['fuel_economy_city']}/{JEEP_SPECS['fuel_economy_hwy']} (City/Highway)")
 
     # Question/Answer Section
     st.header("Technical Support Assistant")
