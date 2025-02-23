@@ -25,16 +25,6 @@ def main():
     st.title("2009 Jeep Wrangler Technical Support")
     st.subheader("Get solutions for common technical issues and maintenance procedures")
     
-    # Debug: Print first/last 4 chars of API key to verify correct one is loaded
-    api_key = st.secrets["OPENAI_API_KEY"]
-    st.write(f"API Key: {api_key[:4]}...{api_key[-4:]}")
-    
-    # Debug: Print all environment variables
-    st.write("Environment variables:")
-    for key, value in os.environ.items():
-        if 'API' in key:
-            st.write(f"{key}: {value[:4]}...{value[-4:]}")
-    
     # Vehicle Specs Section
     if st.sidebar.button("Show Vehicle Specs"):
         st.header("Vehicle Specifications")
